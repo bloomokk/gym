@@ -1,17 +1,17 @@
 <?php
 global $connect;
 require_once 'connect.php';
-$email=$_POST['email'];
+$phone=$_POST['phone'];
 $password=$_POST['password'];
 $submit=$_POST['submit'];
 
-$users_email = $connect->query("select * from users where email='$email'")->fetch_array();
+$users_phone = $connect->query("select * from users where phone='$phone'")->fetch_array();
 
 if ($submit){
-    if (empty($email)) $error["email_error"]="Введите почту";
-    elseif (empty($users_email)) $error["email_log_error"]="Пользователь с такой почтой не существует";
+    if (empty($phone)) $error["phone_error"]="Введите номер телефона";
+    elseif (empty($users_phone)) $error["phone_log_error"]="Пользователь с таким номером не существует";
     if (empty($password)) $error["password_error"]="Введите Пароль";
-    elseif (isset($users_email) && $users_email['password'] != $password) $error["password_log_error"]="Не верный пароль";
+    elseif (isset($users_phone) && $users_phone['password'] != $password) $error["password_log_error"]="Не верный пароль";
 
     if ($error) {
         $_SESSION['error_log'] = $error;
@@ -19,7 +19,7 @@ if ($submit){
         die();
     }
 
-    $_SESSION['user_id'] = $users_email['id'];
+    $_SESSION['user_id'] = $users_phone['id'];
     header('Location: /profile.php');
 }
 

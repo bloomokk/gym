@@ -7,7 +7,7 @@ require_once 'content/header.php';
         <form class="d-flex flex-column gap-3 mx-auto" style="max-width: 600px" method="POST" action="controllers/reg.php" enctype=multipart/form-data>
             <div>
                     <label for="form_file" class="form-label">Выберите аватар</label>
-                    <input class="form-control " type="file" name="img" id="form_file">
+                    <input class="form-control " type="file" name="photo" id="form_file">
                     </div>
                     <?php if(isset($_SESSION['error_reg']['photo_error'])):?>
                         <p class="text-danger"><?= $_SESSION['error_reg']['photo_error']?></p>
@@ -24,16 +24,12 @@ require_once 'content/header.php';
             <?php if(isset($_SESSION['error_reg']['middlename_error'])):?>
                 <p class="text-danger"><?= $_SESSION['error_reg']['middlename_error']?></p>
             <?php endif;?>
-            <input class="form-control" type="email" name="email" placeholder="Почта">
-            <?php if(isset($_SESSION['error_reg']['email_error'])):?>
-                <p class="text-danger"><?= $_SESSION['error_reg']['email_error']?></p>
-            <?php endif;?>
-            <?php if(isset($_SESSION['error_reg']['user_email_error'])):?>
-                <p class="text-danger"><?= $_SESSION['error_reg']['user_email_error']?></p>
-            <?php endif;?>
-            <input class="form-control" type="phone" name="phone" placeholder="Телефон">
+            <input class="form-control" type="phone" name="phone" placeholder="Номер телефона">
             <?php if(isset($_SESSION['error_reg']['phone_error'])):?>
                 <p class="text-danger"><?= $_SESSION['error_reg']['phone_error']?></p>
+            <?php endif;?>
+            <?php if(isset($_SESSION['error_reg']['user_phone_error'])):?>
+                <p class="text-danger"><?= $_SESSION['error_reg']['user_phone_error']?></p>
             <?php endif;?>
             <?php if(isset($_SESSION['error_reg']['user_phone_error'])):?>
                 <p class="text-danger"><?= $_SESSION['error_reg']['user_phone_error']?></p>
@@ -59,6 +55,5 @@ require_once 'content/header.php';
         </form>
     </div>
 </main>
-<?php unset($_SESSION['error_reg']); 
-print_r($sql_create_user);?>
+<?php unset($_SESSION['error_reg']);?>
 
