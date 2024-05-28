@@ -9,9 +9,6 @@ require_once 'content/header.php';
                     <label for="form_file" class="form-label">Выберите аватар</label>
                     <input class="form-control " type="file" name="photo" id="form_file">
                     </div>
-                    <?php if(isset($_SESSION['error_reg']['photo_error'])):?>
-                        <p class="text-danger"><?= $_SESSION['error_reg']['photo_error']?></p>
-                    <?php endif;?>
             <input class="form-control" type="text" name="name" placeholder="Имя">
             <?php if(isset($_SESSION['error_reg']['name_error'])):?>
                 <p class="text-danger"><?= $_SESSION['error_reg']['name_error']?></p>

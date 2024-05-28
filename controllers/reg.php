@@ -36,16 +36,20 @@ if ($_POST["submit"]){
     }
 }
 
-$array = explode('.', $photo['name']);
-$file_name = date('dmHis') . '_' . rand(1, 9999) . '.' . end($array);
-$tmp_name = $photo['tmp_name'];
-$path = "../assets/pictures/$file_name";
-move_uploaded_file($tmp_name, $path);
+if (isset($photo)) {
+    $array = explode('.', $photo['name']);
+    $file_name = date('dmHis') . '_' . rand(1, 9999) . '.' . end($array);
+    $tmp_name = $photo['tmp_name'];
+    $path = "../assets/pictures/$file_name";
+    move_uploaded_file($tmp_name, $path);
+} else {
+    die();
+}
 
 $sql_create_user = "INSERT INTO `users`(`avatar`, `name`, `surname`, `middle_name`, `phone`, `birthday`, `address`, `password`) VALUES ('$file_name', '$name', '$surname', '$middlename', '$phone', '$date', '$address', '$password')";
 
 $connect->query($sql_create_user);
-$user = $connect->query("select id from users where email='$email'")->fetch_row();
+$user = $connect->query("select id from users where phone='$phone'")->fetch_row();
 $_SESSION['user_id'] = $user[0];
 print_r($sql_create_user);
 header('Location: /profile.php');
