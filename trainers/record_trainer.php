@@ -3,7 +3,7 @@ global $connect, $user;
 require_once '../controllers/connect.php';
 require_once '../content/header.php';
 $id_trainer=$_GET['id_trainer'];
-$record = $connect->query("select * from record where busy = 0");
+$record = $connect->query("SELECT * FROM record WHERE busy = 0 AND id_trainer = $id_trainer");
 ?>
 <main class="pt-4">
     <div class="container">
@@ -18,7 +18,7 @@ $record = $connect->query("select * from record where busy = 0");
     echo "<p>Свободной записи нет</p>";
 } else {
     while ($item = $record->fetch_assoc()) {
-        echo "<a class='btn btn-primary' href='../controllers/record/record_trainer.php?id_record={$item['id']}&id_trainer={$id_trainer}'>{$item['time']}</a>";
+        echo "<a class='btn btn-primary' href='../controllers/record/record_trainer.php?id_record={$item['id']}&id_trainer={$id_trainer}'>{$item['time']} {$item['date']}</a>";
     }
 }
 ?>
